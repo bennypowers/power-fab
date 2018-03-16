@@ -1,6 +1,6 @@
 {
   "name": "@power-elements/power-fab",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple material design floating action button ",
   "main": "paper-fab.js",
   "scripts": {
