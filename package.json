@@ -1,0 +1,25 @@
+{
+  "name": "@power-elements/power-fab",
+  "version": "1.0.0",
+  "description": "Simple material design floating action button ",
+  "main": "paper-fab.js",
+  "scripts": {
+    "test": "polymer test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bennypowers/power-fab/power-fab.git"
+  },
+  "keywords": [
+    "fab",
+    "floating action button",
+    "custom element",
+    "lit-html",
+    "material design"
+  ],
+  "author": "Benny Powers",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@polymer/lit-element": "^0.2.2"
+  }
+}
