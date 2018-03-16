@@ -4,7 +4,6 @@ customElements.define('power-fab', class PowerFab extends LitElement {
   static get properties() {
     return {
       label: String,
-      title: String,
       active: Boolean,
     };
   }
@@ -14,16 +13,25 @@ customElements.define('power-fab', class PowerFab extends LitElement {
     this.dispatchEvent(new CustomEvent('active-changed', {detail: {value: this.active}}));
   }
 
+  constructor() {
+    super();
+    this.setAttribute('role', 'button');
+    this.setAttribute('tabindex', '0');
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('click', event => this.toggleActive(event));
-    this.addEventListener('mousedown', event => this.setAttribute('pressed', ''));
-    this.addEventListener('mouseup', event => this.removeAttribute('pressed'));
+    this.addEventListener('mousedown', () => this.setAttribute('pressed', ''));
+    this.addEventListener('mouseup', () => this.removeAttribute('pressed'));
+    this.addEventListener('keydown', event => ['Space', 'Enter'].includes(event.code) && this.setAttribute('pressed', ''));
+    this.addEventListener('keyup', event => ['Space', 'Enter'].includes(event.code) && this.removeAttribute('pressed'));
+    this.addEventListener('keypress', event => ['Space', 'Enter'].includes(event.code) && this.toggleActive(event));
   }
 
-  render({label = '+', title, active}) {
+  render({label = '+', active}) {
     active ? this.setAttribute('active', '') : this.removeAttribute('active');
-    this.setAttribute('aria-label', title);
+    if (this.title) this.setAttribute('aria-label', this.title);
     return html`
     <style>
     :host {
@@ -37,8 +45,12 @@ customElements.define('power-fab', class PowerFab extends LitElement {
       height: 45px;
       border: none;
       outline: none;
-      background-color: hsl(var(--power-fab-background-color-hue), 80%, 50%);
+      background-color: hsl(var(--power-fab-background-color-hue), 100%, 50%);
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    :host(:focus) {
+      background-color: hsl(var(--power-fab-background-color-hue), 75%, 50%);
     }
 
     :host([pressed]) {
@@ -47,7 +59,7 @@ customElements.define('power-fab', class PowerFab extends LitElement {
     }
 
     :host([active]) {
-      background-color: hsl(var(--power-fab-background-color-hue), 90%, 50%);
+      background-color: hsl(var(--power-fab-background-color-hue), 75%, 50%);
     }
 
     span {
