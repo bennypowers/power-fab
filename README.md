@@ -1,3 +1,6 @@
+# Deprecated
+Use `@material/mwc-fab` instead
+
 # \<power-fab\>
 
 Simple Material Design Floating Action Button
